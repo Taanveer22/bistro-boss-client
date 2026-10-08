@@ -4,16 +4,16 @@ import Footer from "../components/Footer";
 
 const Root = () => {
   return (
-    <div>
-      <section>
+    <div className="min-h-screen flex flex-col">
+      <header>
         <Header></Header>
-      </section>
-      <section>
+      </header>
+      <main className="w-full flex-1">
         <Outlet></Outlet>
-      </section>
-      <section>
+      </main>
+      <footer>
         <Footer></Footer>
-      </section>
+      </footer>
     </div>
   );
 };

@@ -1,6 +1,10 @@
+import Container from "../shared/Container";
+
 const Footer = () => {
   return (
-    <footer className="footer footer-horizontal footer-center bg-base-200 text-base-content rounded p-10">
+   <div className="bg-base-300 text-base-content">
+     <Container>
+      <footer className="footer footer-horizontal footer-center py-10">
       <nav className="grid grid-flow-col gap-4">
         <a className="link link-hover">About us</a>
         <a className="link link-hover">Contact</a>
@@ -49,11 +53,13 @@ const Footer = () => {
       </nav>
       <aside>
         <p>
-          Copyright © {new Date().getFullYear()} - All right reserved by ACME
-          Industries Ltd
+          Copyright © {new Date().getFullYear()} - All right reserved by Bistro Boss
+          Restaurants Ltd
         </p>
       </aside>
     </footer>
+     </Container>
+   </div>
   );
 };
 
