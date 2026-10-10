@@ -4,7 +4,7 @@ import Footer from "../components/Footer";
 
 const Root = () => {
   return (
-    <div>
+    <>
       <header>
         <Header></Header>
       </header>
@@ -14,7 +14,7 @@ const Root = () => {
       <footer>
         <Footer></Footer>
       </footer>
-    </div>
+    </>
   );
 };
 
