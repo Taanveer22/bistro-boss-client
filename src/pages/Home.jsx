@@ -1,5 +1,6 @@
 import Banner from "../components/Banner";
 import Category from "../components/Category";
+import Featured from "../components/Featured";
 import PopularMenu from "../components/PopularMenu";
 
 const Home = () => {
@@ -15,6 +16,10 @@ const Home = () => {
 
       <section className="mb-8 sm:mb-10 lg:mb-12">
         <PopularMenu></PopularMenu>
+      </section>
+
+       <section className="mb-8 sm:mb-10 lg:mb-12">
+        <Featured></Featured>
       </section>
     </>
   );

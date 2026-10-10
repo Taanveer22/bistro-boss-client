@@ -50,13 +50,13 @@ const Header = () => {
                 {links}
               </ul>
             </div>
-            <a className="btn text-xl">Bistro Boss</a>
+            <a className="btn btn-soft text-xl">Bistro Boss</a>
           </div>
           <div className="navbar-center hidden lg:flex">
             <ul className="menu menu-horizontal px-1">{links}</ul>
           </div>
           <div className="navbar-end">
-            <a className="btn">Button</a>
+            <a className="btn btn-soft">Button</a>
           </div>
         </div>
       </Container>
