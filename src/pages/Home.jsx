@@ -2,6 +2,7 @@ import Banner from "../components/Banner";
 import Category from "../components/Category";
 import Featured from "../components/Featured";
 import PopularMenu from "../components/PopularMenu";
+import Testimonials from "../components/Testimonials";
 
 const Home = () => {
   return (
@@ -18,8 +19,12 @@ const Home = () => {
         <PopularMenu></PopularMenu>
       </section>
 
-       <section className="mb-8 sm:mb-10 lg:mb-12">
+      <section className="mb-8 sm:mb-10 lg:mb-12">
         <Featured></Featured>
+      </section>
+
+      <section className="mb-8 sm:mb-10 lg:mb-12">
+        <Testimonials></Testimonials>
       </section>
     </>
   );
