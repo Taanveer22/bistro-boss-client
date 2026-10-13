@@ -1,16 +1,17 @@
+import { Link } from "react-router";
 import Container from "../shared/Container";
 
 const Header = () => {
   const links = (
     <>
       <li>
-        <a>Item 1</a>
+        <Link to="/">Home</Link>
       </li>
       <li>
-        <a>Item 2</a>
+        <Link to="/menu">Food Menu</Link>
       </li>
       <li>
-        <a>Item 3</a>
+        <Link to="/order">Food Order</Link>
       </li>
     </>
   );
