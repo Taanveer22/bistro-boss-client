@@ -1,5 +1,6 @@
 import SectionTitle from "../shared/SectionTitle";
 import Container from "../shared/Container";
+import baseUrl from "../api/baseUrl";
 
 // Import Swiper React components & modules
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -18,11 +19,11 @@ const Testimonials = () => {
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
-    fetch(`/reviews.json`)
+    fetch(`${baseUrl}/reviews`)
       .then((res) => res.json())
       .then((data) => setReviews(data));
   }, []);
-  console.log(reviews);
+  // console.log(reviews);
 
   return (
     <div>

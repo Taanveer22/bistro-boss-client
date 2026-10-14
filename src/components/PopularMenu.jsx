@@ -3,12 +3,13 @@ import Container from "../shared/Container";
 import SectionTitle from "../shared/SectionTitle";
 import MenuItem from "../shared/MenuItem";
 import { Link } from "react-router";
+import baseUrl from "../api/baseUrl";
 
 const PopularMenu = () => {
   const [menu, setMenu] = useState([]);
 
   useEffect(() => {
-    fetch("/menu.json")
+    fetch(`${baseUrl}/menus`)
       .then((res) => res.json())
       .then((data) => {
         const pouplarMenuData = data.filter(

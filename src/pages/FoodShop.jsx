@@ -54,7 +54,7 @@ const FoodShop = () => {
   return (
     <>
       <Helmet>
-        <title>Bistro Boss | Order</title>
+        <title>Bistro Boss | Shop</title>
       </Helmet>
 
       <HeroCover
