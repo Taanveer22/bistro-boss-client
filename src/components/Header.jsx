@@ -11,7 +11,7 @@ const Header = () => {
         <Link to="/menu">Food Menu</Link>
       </li>
       <li>
-        <Link to="/shop">Food Shop</Link>
+        <Link to="/shop/offered">Food Shop</Link>
       </li>
     </>
   );
@@ -57,7 +57,7 @@ const Header = () => {
             <ul className="menu menu-horizontal px-1">{links}</ul>
           </div>
           <div className="navbar-end">
-            <a className="btn btn-soft">Button</a>
+            <a className="btn btn-soft">Login</a>
           </div>
         </div>
       </Container>

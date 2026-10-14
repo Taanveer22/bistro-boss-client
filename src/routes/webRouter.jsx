@@ -18,7 +18,7 @@ const webRouter = createBrowserRouter([
         element: <FoodMenu></FoodMenu>,
       },
       {
-        path: "/shop",
+        path: "/shop/:categoryName",
         element: <FoodShop></FoodShop>,
       },
     ],
