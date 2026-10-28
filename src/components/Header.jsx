@@ -57,7 +57,9 @@ const Header = () => {
             <ul className="menu menu-horizontal px-1">{links}</ul>
           </div>
           <div className="navbar-end">
-            <a className="btn btn-soft">Login</a>
+            <Link className="btn btn-soft" to="/login">
+              Login
+            </Link>
           </div>
         </div>
       </Container>

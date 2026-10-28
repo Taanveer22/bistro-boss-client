@@ -3,6 +3,7 @@ import { createBrowserRouter } from "react-router";
 import Home from "../pages/Home";
 import FoodMenu from "../pages/FoodMenu";
 import FoodShop from "../pages/FoodShop";
+import Login from "../pages/Login";
 
 const webRouter = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ const webRouter = createBrowserRouter([
       {
         path: "/shop/:categoryName",
         element: <FoodShop></FoodShop>,
+      },
+      {
+        path: "/login",
+        element: <Login></Login>,
       },
     ],
   },
