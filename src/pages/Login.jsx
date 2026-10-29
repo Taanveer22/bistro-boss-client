@@ -1,9 +1,25 @@
+import { useNavigate } from "react-router";
+import useAuth from "../hooks/useAuth";
+
 const Login = () => {
+  const { signInWithGoogle } = useAuth();
+  const navigate = useNavigate();
+
   const handleLoginForm = (e) => {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
     console.log(email, password);
+  };
+
+  const handleGoogleBtn = async () => {
+    try {
+      const result = await signInWithGoogle();
+      console.log(result);
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -17,11 +33,8 @@ const Login = () => {
             a id nisi.
           </p>
         </div>
-        <form
-          onSubmit={handleLoginForm}
-          className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl"
-        >
-          <div className="card-body">
+        <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
+          <form onSubmit={handleLoginForm} className="card-body">
             <fieldset className="fieldset">
               <label className="label">Email</label>
               <input
@@ -41,8 +54,15 @@ const Login = () => {
                 Login
               </button>
             </fieldset>
-          </div>
-        </form>
+          </form>
+          <button
+            onClick={handleGoogleBtn}
+            className="btn btn-warning my-4 mx-4"
+            type="submit"
+          >
+            Login with google
+          </button>
+        </div>
       </div>
     </div>
   );
