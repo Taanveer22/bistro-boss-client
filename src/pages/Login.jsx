@@ -1,9 +1,20 @@
 import { useNavigate } from "react-router";
 import useAuth from "../hooks/useAuth";
+import { useEffect } from "react";
+import { useRef } from "react";
+import { useState } from "react";
+import {
+  loadCaptchaEnginge,
+  LoadCanvasTemplate,
+  validateCaptcha,
+} from "react-simple-captcha";
 
 const Login = () => {
   const { signInWithGoogle } = useAuth();
   const navigate = useNavigate();
+
+  const captchaRef = useRef(null);
+  const [disabledLogin, setDisabledLogin] = useState(true);
 
   const handleLoginForm = (e) => {
     e.preventDefault();
@@ -21,6 +32,16 @@ const Login = () => {
       console.log(error);
     }
   };
+
+  const handleCaptchaValidation = () => {
+    if (validateCaptcha(captchaRef.current.value) === true) {
+      setDisabledLogin(false);
+    }
+  };
+
+  useEffect(() => {
+    loadCaptchaEnginge(6);
+  }, []);
 
   return (
     <div className="hero bg-base-200 min-h-screen">
@@ -50,7 +71,30 @@ const Login = () => {
                 className="input"
                 placeholder="Password"
               />
-              <button className="btn btn-neutral mt-4" type="submit">
+
+              <label className="label">
+                <LoadCanvasTemplate />
+              </label>
+              <input
+                ref={captchaRef}
+                name="captcha"
+                type="text"
+                className="input"
+                placeholder="Enter the text you see above"
+              />
+              <button
+                onClick={handleCaptchaValidation}
+                className="btn btn-success mt-4"
+                type="button"
+              >
+                Validate Captcha
+              </button>
+
+              <button
+                disabled={disabledLogin}
+                className="btn btn-neutral mt-4"
+                type="submit"
+              >
                 Login
               </button>
             </fieldset>
@@ -58,7 +102,7 @@ const Login = () => {
           <button
             onClick={handleGoogleBtn}
             className="btn btn-warning my-4 mx-4"
-            type="submit"
+            type="button"
           >
             Login with google
           </button>
