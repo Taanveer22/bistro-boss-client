@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import useAuth from "../hooks/useAuth";
 import { useEffect } from "react";
 import { useRef } from "react";
@@ -10,22 +10,25 @@ import {
 } from "react-simple-captcha";
 
 const Login = () => {
-  const { signInWithGoogle } = useAuth();
+  const { googleSigninUser, signInUser } = useAuth();
   const navigate = useNavigate();
 
   const captchaRef = useRef(null);
   const [disabledLogin, setDisabledLogin] = useState(true);
 
-  const handleLoginForm = (e) => {
+  const handleLoginForm = async (e) => {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
     console.log(email, password);
+    const result = await signInUser(email, password);
+    console.log(result);
+    navigate("/");
   };
 
   const handleGoogleBtn = async () => {
     try {
-      const result = await signInWithGoogle();
+      const result = await googleSigninUser();
       console.log(result);
       navigate("/");
     } catch (error) {
@@ -46,15 +49,17 @@ const Login = () => {
   return (
     <div className="hero bg-base-200 min-h-screen">
       <div className="hero-content flex-col lg:flex-row-reverse">
-        <div className="text-center lg:text-left">
-          <h1 className="text-5xl font-bold">Login now!</h1>
+        <div className="w-full min-w-sm lg:w-1/2 text-center lg:text-left">
+          <h1 className="text-5xl font-bold">Login Page</h1>
           <p className="py-6">
-            Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-            excepturi exercitationem quasi. In deleniti eaque aut repudiandae et
-            a id nisi.
+            New to here . Please{" "}
+            <Link to="/signup" className="text-blue-500">
+              Sign Up
+            </Link>{" "}
+            now .
           </p>
         </div>
-        <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
+        <div className="w-full min-w-sm lg:w-1/2 card bg-base-100  shrink-0 shadow-2xl">
           <form onSubmit={handleLoginForm} className="card-body">
             <fieldset className="fieldset">
               <label className="label">Email</label>

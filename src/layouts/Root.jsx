@@ -4,8 +4,10 @@ import Footer from "../components/Footer";
 
 const Root = () => {
   const location = useLocation();
-  console.log(location);
-  const noHeaderFooter = location?.pathname === "/login";
+  // console.log(location);
+  const noHeaderFooter =
+    location?.pathname === "/login" || location?.pathname === "/signup";
+
   return (
     <>
       {noHeaderFooter || (

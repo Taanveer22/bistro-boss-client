@@ -1,7 +1,9 @@
 import { Link } from "react-router";
 import Container from "../shared/Container";
+import useAuth from "../hooks/useAuth";
 
 const Header = () => {
+  const { user, signOutUser } = useAuth();
   const links = (
     <>
       <li>
@@ -15,6 +17,10 @@ const Header = () => {
       </li>
     </>
   );
+
+  const handleSignOutUser = () => {
+    signOutUser();
+  };
 
   return (
     <div className="fixed top-0 z-50 w-full bg-black/30 text-white">
@@ -57,9 +63,19 @@ const Header = () => {
             <ul className="menu menu-horizontal px-1">{links}</ul>
           </div>
           <div className="navbar-end">
-            <Link className="btn btn-soft" to="/login">
-              Login
-            </Link>
+            {user ? (
+              <button
+                onClick={handleSignOutUser}
+                className="btn btn-soft"
+                type="button"
+              >
+                Logout
+              </button>
+            ) : (
+              <Link className="btn btn-soft" to="/login">
+                Login
+              </Link>
+            )}
           </div>
         </div>
       </Container>
