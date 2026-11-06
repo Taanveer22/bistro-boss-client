@@ -14,7 +14,7 @@ const SignUp = () => {
 
   const handleSignUpForm = async (data) => {
     const { email, password, name, photo } = data;
-    console.log(email, password, name, photo);
+    // console.log(email, password, name, photo);
     try {
       const result = await createUser(email, password);
       console.log(result);

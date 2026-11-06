@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import useAuth from "../hooks/useAuth";
 import { useEffect } from "react";
 import { useRef } from "react";
@@ -12,25 +12,32 @@ import {
 const Login = () => {
   const { googleSigninUser, signInUser } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const captchaRef = useRef(null);
   const [disabledLogin, setDisabledLogin] = useState(true);
+
+  const from = location?.state?.from?.pathname || "/";
 
   const handleLoginForm = async (e) => {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
-    console.log(email, password);
-    const result = await signInUser(email, password);
-    console.log(result);
-    navigate("/");
+    // console.log(email, password);
+    try {
+      const result = await signInUser(email, password);
+      console.log(result);
+      navigate(from, { replace: true });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleGoogleBtn = async () => {
     try {
       const result = await googleSigninUser();
       console.log(result);
-      navigate("/");
+      navigate(from, { replace: true });
     } catch (error) {
       console.log(error);
     }

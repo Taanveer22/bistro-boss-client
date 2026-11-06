@@ -19,7 +19,13 @@ const Header = () => {
   );
 
   const handleSignOutUser = () => {
-    signOutUser();
+    signOutUser()
+      .then(() => {
+        console.log("log out done");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (

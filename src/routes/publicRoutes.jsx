@@ -5,8 +5,9 @@ import FoodMenu from "../pages/FoodMenu";
 import FoodShop from "../pages/FoodShop";
 import Login from "../pages/Login";
 import SignUp from "../pages/SignUp";
+import PrivateRoute from "./PrivateRoute";
 
-const webRouter = createBrowserRouter([
+const publicRoutes = createBrowserRouter([
   {
     path: "/",
     element: <Root></Root>,
@@ -17,7 +18,11 @@ const webRouter = createBrowserRouter([
       },
       {
         path: "/menu",
-        element: <FoodMenu></FoodMenu>,
+        element: (
+          <PrivateRoute>
+            <FoodMenu></FoodMenu>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/shop/:categoryName",
@@ -35,4 +40,4 @@ const webRouter = createBrowserRouter([
   },
 ]);
 
-export default webRouter;
+export default publicRoutes;
