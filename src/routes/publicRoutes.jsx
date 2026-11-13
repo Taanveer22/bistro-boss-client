@@ -5,6 +5,8 @@ import FoodMenu from "../pages/FoodMenu";
 import FoodShop from "../pages/FoodShop";
 import Login from "../pages/Login";
 import SignUp from "../pages/SignUp";
+import MyCart from "../components/dashboard/MyCart";
+import PrivateRoute from "../routes/PrivateRoute";
 
 const publicRoutes = createBrowserRouter([
   {
@@ -30,6 +32,14 @@ const publicRoutes = createBrowserRouter([
       {
         path: "/signup",
         element: <SignUp></SignUp>,
+      },
+      {
+        path: "/myCart",
+        element: (
+          <PrivateRoute>
+            <MyCart></MyCart>
+          </PrivateRoute>
+        ),
       },
     ],
   },

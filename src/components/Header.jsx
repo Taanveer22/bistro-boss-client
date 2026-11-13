@@ -1,19 +1,26 @@
-import { Link } from "react-router";
+import { Link, NavLink } from "react-router";
 import Container from "../shared/Container";
 import useAuth from "../hooks/useAuth";
+import { FaShoppingCart } from "react-icons/fa";
 
 const Header = () => {
   const { user, signOutUser } = useAuth();
   const links = (
     <>
       <li>
-        <Link to="/">Home</Link>
+        <NavLink to="/">Home</NavLink>
       </li>
       <li>
-        <Link to="/menu">Food Menu</Link>
+        <NavLink to="/menu">Food Menu</NavLink>
       </li>
       <li>
-        <Link to="/shop/offered">Food Shop</Link>
+        <NavLink to="/shop/offered">Food Shop</NavLink>
+      </li>
+      <li>
+        <NavLink to="/myCart">
+          <FaShoppingCart size={20}></FaShoppingCart>
+          <div className="badge badge-sm badge-secondary">0</div>
+        </NavLink>
       </li>
     </>
   );
@@ -66,7 +73,7 @@ const Header = () => {
             <a className="btn btn-soft text-xl">Bistro Boss</a>
           </div>
           <div className="navbar-center hidden lg:flex">
-            <ul className="menu menu-horizontal px-1">{links}</ul>
+            <ul className="menu menu-horizontal items-center px-1">{links}</ul>
           </div>
           <div className="navbar-end">
             {user ? (

@@ -15,7 +15,7 @@ const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const captchaRef = useRef(null);
-  const [disabledLogin, setDisabledLogin] = useState(true);
+  const [disabledLogin, setDisabledLogin] = useState(false);
   const {
     register,
     handleSubmit,
@@ -25,7 +25,7 @@ const Login = () => {
   const from = location?.state?.from?.pathname || "/";
 
   const handleLoginForm = async (data) => {
-    console.log(data);
+    // console.log(data);
     const { email, password } = data;
     try {
       const result = await signInUser(email, password);
