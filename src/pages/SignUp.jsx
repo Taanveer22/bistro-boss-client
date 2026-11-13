@@ -4,8 +4,7 @@ import useAuth from "../hooks/useAuth";
 
 const SignUp = () => {
   const navigate = useNavigate();
-  const { createUser, updateUserProfile} = useAuth();
-
+  const { createUser, updateUserProfile } = useAuth();
   const {
     register,
     handleSubmit,

@@ -70,13 +70,16 @@ const Header = () => {
           </div>
           <div className="navbar-end">
             {user ? (
-              <button
-                onClick={handleSignOutUser}
-                className="btn btn-soft"
-                type="button"
-              >
-                Logout
-              </button>
+              <div className="flex gap-2 items-center justify-center">
+                <h2 className="text-xl font-semibold">{user?.displayName}</h2>
+                <button
+                  onClick={handleSignOutUser}
+                  className="btn btn-soft"
+                  type="button"
+                >
+                  Logout
+                </button>
+              </div>
             ) : (
               <Link className="btn btn-soft" to="/login">
                 Login

@@ -8,22 +8,25 @@ import {
   LoadCanvasTemplate,
   validateCaptcha,
 } from "react-simple-captcha";
+import { useForm } from "react-hook-form";
 
 const Login = () => {
   const { googleSigninUser, signInUser } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-
   const captchaRef = useRef(null);
   const [disabledLogin, setDisabledLogin] = useState(true);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   const from = location?.state?.from?.pathname || "/";
 
-  const handleLoginForm = async (e) => {
-    e.preventDefault();
-    const email = e.target.email.value;
-    const password = e.target.password.value;
-    // console.log(email, password);
+  const handleLoginForm = async (data) => {
+    console.log(data);
+    const { email, password } = data;
     try {
       const result = await signInUser(email, password);
       console.log(result);
@@ -67,22 +70,27 @@ const Login = () => {
           </p>
         </div>
         <div className="w-full min-w-sm lg:w-1/2 card bg-base-100  shrink-0 shadow-2xl">
-          <form onSubmit={handleLoginForm} className="card-body">
+          <form onSubmit={handleSubmit(handleLoginForm)} className="card-body">
             <fieldset className="fieldset">
+              {/* email field */}
               <label className="label">Email</label>
               <input
-                name="email"
                 type="email"
                 className="input"
                 placeholder="Email"
+                {...register("email", { required: "email is required" })}
               />
+              {errors.email && <p role="alert">{errors.email.message}</p>}
+
+              {/* password field */}
               <label className="label">Password</label>
               <input
-                name="password"
                 type="password"
                 className="input"
                 placeholder="Password"
+                {...register("password", { required: "password is required" })}
               />
+              {errors.password && <p role="alert">{errors.password.message}</p>}
 
               <label className="label">
                 <LoadCanvasTemplate />
@@ -113,7 +121,7 @@ const Login = () => {
           </form>
           <button
             onClick={handleGoogleBtn}
-            className="btn btn-warning my-4 mx-4"
+            className="btn btn-warning my-4 mx-6"
             type="button"
           >
             Login with google
