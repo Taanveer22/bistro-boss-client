@@ -1,12 +1,12 @@
 import Root from "../layouts/Root";
 import { createBrowserRouter } from "react-router";
-import Home from "../pages/Home";
-import FoodMenu from "../pages/FoodMenu";
-import FoodShop from "../pages/FoodShop";
 import Login from "../pages/Login";
 import SignUp from "../pages/SignUp";
 import MyCart from "../components/dashboard/MyCart";
 import PrivateRoute from "../routes/PrivateRoute";
+import HomePage from "../pages/HomePage";
+import MenuPage from "../pages/MenuPage";
+import ShopPage from "../pages/ShopPage";
 
 const publicRoutes = createBrowserRouter([
   {
@@ -15,15 +15,15 @@ const publicRoutes = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Home></Home>,
+        element: <HomePage></HomePage>,
       },
       {
         path: "/menu",
-        element: <FoodMenu></FoodMenu>,
+        element: <MenuPage></MenuPage>,
       },
       {
-        path: "/shop/:categoryName",
-        element: <FoodShop></FoodShop>,
+        path: "/shop/:menuCategory",
+        element: <ShopPage></ShopPage>,
       },
       {
         path: "/login",

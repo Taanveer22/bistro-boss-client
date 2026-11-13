@@ -2,18 +2,18 @@ import { Link } from "react-router";
 import MenuItem from "./MenuItem";
 import Container from "./Container";
 
-const FoodMenuCategory = ({ categoryData, categoryName }) => {
+const MenuPageCategory = ({ menuCategoryData, menuCategory }) => {
   return (
     <div>
       <Container>
         <section className="grid gap-8 grid-cols-1 sm:grid-cols-2">
-          {categoryData.map((element) => (
+          {menuCategoryData.map((element) => (
             <MenuItem key={element._id} element={element}></MenuItem>
           ))}
         </section>
         <div className="flex justify-center items-center mt-4 ">
           <Link
-            to={`/shop/${categoryName}`}
+            to={`/shop/${menuCategory}`}
             className="btn btn-outline border-0 border-b-2"
           >
             Order Now
@@ -24,4 +24,4 @@ const FoodMenuCategory = ({ categoryData, categoryName }) => {
   );
 };
 
-export default FoodMenuCategory;
+export default MenuPageCategory;

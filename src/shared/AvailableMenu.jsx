@@ -17,12 +17,12 @@ import "swiper/css/pagination";
 import { Pagination } from "swiper/modules";
 import Container from "./Container";
 
-const MenuCategories = () => {
+const AvailableMenu = () => {
   return (
     <div>
       <Container>
         <SectionTitle
-          heading="Order Online Any Category"
+          heading="Order Online Available"
           subHeading="From 11:00am to 10:00pm"
         ></SectionTitle>
         <Swiper
@@ -70,4 +70,4 @@ const MenuCategories = () => {
   );
 };
 
-export default MenuCategories;
+export default AvailableMenu;

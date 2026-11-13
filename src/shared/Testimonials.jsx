@@ -1,6 +1,5 @@
 import SectionTitle from "./SectionTitle";
 import Container from "./Container";
-import baseUrl from "../api/baseUrl";
 
 // Import Swiper React components & modules
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -14,16 +13,23 @@ import "swiper/css/navigation";
 //Import react rating
 import { Rating } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
+import useAxiosPublic from "../hooks/useAxiosPublic";
 
 const Testimonials = () => {
   const [reviews, setReviews] = useState([]);
+  const axiosPublic = useAxiosPublic();
 
   useEffect(() => {
-    fetch(`${baseUrl}/reviews`)
-      .then((res) => res.json())
-      .then((data) => setReviews(data));
-  }, []);
-  // console.log(reviews);
+    axiosPublic
+      .get("/reviews")
+      .then((res) => {
+        // console.log(res.data);
+        setReviews(res.data);
+      })
+      .catch((error) => {
+        console.log("failed to fetch reviews data", error);
+      });
+  }, [axiosPublic]);
 
   return (
     <div>

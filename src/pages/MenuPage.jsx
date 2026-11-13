@@ -6,30 +6,40 @@ import pizzaBg from "../assets/menu/pizza-bg.jpg";
 import saladBg from "../assets/menu/salad-bg.jpg";
 import soupBg from "../assets/menu/soup-bg.jpg";
 import SectionTitle from "../shared/SectionTitle";
-import FoodMenuCategory from "../shared/FoodMenuCategory";
-import useFoodMenu from "../hooks/useFoodMenu";
+import MenuPageCategory from "../shared/MenuPageCategory";
+import useMenuData from "../hooks/useMenuData";
 
-const FoodMenu = () => {
-  const foodMenu = useFoodMenu() || [];
-  // console.log(foodMenu);
+const MenuPage = () => {
+  const foodMenuData = useMenuData() || [];
+  // console.log(foodMenuData);
 
-  const offeredMenu = foodMenu?.filter((item) => item.category === "offered");
-  // console.log(offeredMenu);
+  const offeredMenuData = foodMenuData?.filter(
+    (item) => item.category === "offered",
+  );
+  // console.log(offeredMenuData);
 
-  const saladMenu = foodMenu?.filter((item) => item.category === "salad");
-  // console.log(saladMenu);
+  const saladMenuData = foodMenuData?.filter(
+    (item) => item.category === "salad",
+  );
+  // console.log(saladMenuData);
 
-  const pizzaMenu = foodMenu?.filter((item) => item.category === "pizza");
-  // console.log(pizzaMenu);
+  const pizzaMenuData = foodMenuData?.filter(
+    (item) => item.category === "pizza",
+  );
+  // console.log(pizzaMenuData);
 
-  const soupMenu = foodMenu?.filter((item) => item.category === "soup");
-  // console.log(soupMenu);
+  const soupMenuData = foodMenuData?.filter((item) => item.category === "soup");
+  // console.log(soupMenuData);
 
-  const dessertMenu = foodMenu?.filter((item) => item.category === "dessert");
-  // console.log(dessertMenu);
+  const dessertMenuData = foodMenuData?.filter(
+    (item) => item.category === "dessert",
+  );
+  // console.log(dessertMenuData);
 
-  const drinkMenu = foodMenu?.filter((item) => item.category === "drink");
-  console.log(drinkMenu);
+  const drinkMenuData = foodMenuData?.filter(
+    (item) => item.category === "drink",
+  );
+  console.log(drinkMenuData);
 
   return (
     <>
@@ -48,10 +58,10 @@ const FoodMenu = () => {
           heading="Don't Miss"
           subHeading="Today's Offer"
         ></SectionTitle>
-        <FoodMenuCategory
-          categoryData={offeredMenu}
-          categoryName="offered"
-        ></FoodMenuCategory>
+        <MenuPageCategory
+          menuCategoryData={offeredMenuData}
+          menuCategory="offered"
+        ></MenuPageCategory>
       </div>
 
       {/* salad menu */}
@@ -65,10 +75,10 @@ const FoodMenu = () => {
           heading="Don't Miss"
           subHeading="Today's Salad"
         ></SectionTitle>
-        <FoodMenuCategory
-          categoryData={saladMenu}
-          categoryName="salad"
-        ></FoodMenuCategory>
+        <MenuPageCategory
+          menuCategoryData={saladMenuData}
+          menuCategory="salad"
+        ></MenuPageCategory>
       </div>
 
       {/* pizza menu */}
@@ -82,10 +92,10 @@ const FoodMenu = () => {
           heading="Don't Miss"
           subHeading="Today's Pizza"
         ></SectionTitle>
-        <FoodMenuCategory
-          categoryData={pizzaMenu}
-          categoryName="pizza"
-        ></FoodMenuCategory>
+        <MenuPageCategory
+          menuCategoryData={pizzaMenuData}
+          menuCategory="pizza"
+        ></MenuPageCategory>
       </div>
 
       {/* soup menu */}
@@ -99,10 +109,10 @@ const FoodMenu = () => {
           heading="Don't Miss"
           subHeading="Today's Soup"
         ></SectionTitle>
-        <FoodMenuCategory
-          categoryData={soupMenu}
-          categoryName="soup"
-        ></FoodMenuCategory>
+        <MenuPageCategory
+          menuCategoryData={soupMenuData}
+          menuCategory="soup"
+        ></MenuPageCategory>
       </div>
 
       {/* dessert menu */}
@@ -116,10 +126,10 @@ const FoodMenu = () => {
           heading="Don't Miss"
           subHeading="Today's Dessert"
         ></SectionTitle>
-        <FoodMenuCategory
-          categoryData={dessertMenu}
-          categoryName="dessert"
-        ></FoodMenuCategory>
+        <MenuPageCategory
+          menuCategoryData={dessertMenuData}
+          menuCategory="dessert"
+        ></MenuPageCategory>
       </div>
 
       {/* drinks menu */}
@@ -133,13 +143,13 @@ const FoodMenu = () => {
           heading="Don't Miss"
           subHeading="Today's Drink"
         ></SectionTitle>
-        <FoodMenuCategory
-          categoryData={drinkMenu}
-          categoryName="drink"
-        ></FoodMenuCategory>
+        <MenuPageCategory
+          menuCategoryData={drinkMenuData}
+          menuCategory="drink"
+        ></MenuPageCategory>
       </div>
     </>
   );
 };
 
-export default FoodMenu;
+export default MenuPage;

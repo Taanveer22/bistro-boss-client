@@ -5,32 +5,32 @@ import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import { useState } from "react";
 import Container from "../shared/Container";
-import useFoodMenu from "../hooks/useFoodMenu";
 import ShopTabCategory from "../shared/ShopTabCategory";
 import { useParams } from "react-router";
+import useMenuData from "../hooks/useMenuData";
 
-const FoodShop = () => {
-  const { categoryName } = useParams();
+const ShopPage = () => {
+  const { menuCategory } = useParams();
 
   let initialTab = 0;
 
-  if (categoryName === "offered") {
+  if (menuCategory === "offered") {
     initialTab = 0;
-  } else if (categoryName === "salad") {
+  } else if (menuCategory === "salad") {
     initialTab = 1;
-  } else if (categoryName === "pizza") {
+  } else if (menuCategory === "pizza") {
     initialTab = 2;
-  } else if (categoryName === "soup") {
+  } else if (menuCategory === "soup") {
     initialTab = 3;
-  } else if (categoryName === "dessert") {
+  } else if (menuCategory === "dessert") {
     initialTab = 4;
-  } else if (categoryName === "drink") {
+  } else if (menuCategory === "drink") {
     initialTab = 5;
   }
 
   const [tabIndex, setTabIndex] = useState(initialTab);
 
-  const foodMenu = useFoodMenu() || [];
+  const foodMenu = useMenuData() || [];
   // console.log(foodMenu);
 
   const offeredMenu = foodMenu?.filter((item) => item.category === "offered");
@@ -97,4 +97,4 @@ const FoodShop = () => {
   );
 };
 
-export default FoodShop;
+export default ShopPage;

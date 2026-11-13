@@ -11,10 +11,10 @@ const Header = () => {
         <NavLink to="/">Home</NavLink>
       </li>
       <li>
-        <NavLink to="/menu">Food Menu</NavLink>
+        <NavLink to="/menu">Menu</NavLink>
       </li>
       <li>
-        <NavLink to="/shop/offered">Food Shop</NavLink>
+        <NavLink to="/shop/offered">Shop</NavLink>
       </li>
       <li>
         <NavLink to="/myCart">
