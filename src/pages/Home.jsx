@@ -1,9 +1,9 @@
 import { Helmet } from "react-helmet-async";
-import Banner from "../components/Banner";
-import Category from "../components/Category";
-import Featured from "../components/Featured";
-import PopularMenu from "../components/PopularMenu";
-import Testimonials from "../components/Testimonials";
+import Banner from "../shared/Banner";
+import PopularMenu from "../shared/PopularMenu";
+import Testimonials from "../shared/Testimonials";
+import MenuCategories from "../shared/MenuCategories";
+import FeaturedMenu from "../shared/FeaturedMenu";
 
 const Home = () => {
   return (
@@ -17,7 +17,7 @@ const Home = () => {
       </section>
 
       <section className="mb-8 sm:mb-10 lg:mb-12">
-        <Category></Category>
+        <MenuCategories></MenuCategories>
       </section>
 
       <section className="mb-8 sm:mb-10 lg:mb-12">
@@ -25,7 +25,7 @@ const Home = () => {
       </section>
 
       <section className="mb-8 sm:mb-10 lg:mb-12">
-        <Featured></Featured>
+        <FeaturedMenu></FeaturedMenu>
       </section>
 
       <section className="mb-8 sm:mb-10 lg:mb-12">

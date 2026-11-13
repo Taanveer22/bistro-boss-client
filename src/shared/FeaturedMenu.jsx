@@ -1,8 +1,8 @@
 import featuredJpg from "../assets/home/featured.jpg";
-import Container from "../shared/Container";
-import SectionTitle from "../shared/SectionTitle";
+import Container from "./Container";
+import SectionTitle from "./SectionTitle";
 
-const Featured = () => {
+const FeaturedMenu = () => {
   return (
     <div
       style={{
@@ -12,7 +12,7 @@ const Featured = () => {
     >
       <Container>
         <SectionTitle
-          heading="From Our Menu"
+          heading="From Featured Menu"
           subHeading="Check it out"
         ></SectionTitle>
         <div className="flex flex-col sm:flex-row gap-6 items-center">
@@ -41,4 +41,4 @@ const Featured = () => {
   );
 };
 
-export default Featured;
+export default FeaturedMenu;

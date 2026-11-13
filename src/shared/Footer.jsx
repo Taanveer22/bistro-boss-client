@@ -1,4 +1,4 @@
-import Container from "../shared/Container";
+import Container from "./Container";
 
 const Footer = () => {
   return (

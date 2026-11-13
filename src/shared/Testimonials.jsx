@@ -1,5 +1,5 @@
-import SectionTitle from "../shared/SectionTitle";
-import Container from "../shared/Container";
+import SectionTitle from "./SectionTitle";
+import Container from "./Container";
 import baseUrl from "../api/baseUrl";
 
 // Import Swiper React components & modules

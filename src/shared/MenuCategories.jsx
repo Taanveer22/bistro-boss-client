@@ -4,7 +4,7 @@ import slide2 from "../assets/home/slide2.jpg";
 import slide3 from "../assets/home/slide3.jpg";
 import slide4 from "../assets/home/slide4.jpg";
 import slide5 from "../assets/home/slide5.jpg";
-import SectionTitle from "../shared/SectionTitle";
+import SectionTitle from "./SectionTitle";
 
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -15,14 +15,14 @@ import "swiper/css/pagination";
 
 // import Swiper required modules
 import { Pagination } from "swiper/modules";
-import Container from "../shared/Container";
+import Container from "./Container";
 
-const Category = () => {
+const MenuCategories = () => {
   return (
     <div>
       <Container>
         <SectionTitle
-          heading="Order Online"
+          heading="Order Online Any Category"
           subHeading="From 11:00am to 10:00pm"
         ></SectionTitle>
         <Swiper
@@ -70,4 +70,4 @@ const Category = () => {
   );
 };
 
-export default Category;
+export default MenuCategories;

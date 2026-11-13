@@ -1,5 +1,5 @@
 import { Link, NavLink } from "react-router";
-import Container from "../shared/Container";
+import Container from "./Container";
 import useAuth from "../hooks/useAuth";
 import { FaShoppingCart } from "react-icons/fa";
 

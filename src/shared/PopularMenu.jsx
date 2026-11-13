@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import Container from "../shared/Container";
-import SectionTitle from "../shared/SectionTitle";
-import MenuItem from "../shared/MenuItem";
+import Container from "./Container";
+import SectionTitle from "./SectionTitle";
+import MenuItem from "./MenuItem";
 import { Link } from "react-router";
 import baseUrl from "../api/baseUrl";
 
