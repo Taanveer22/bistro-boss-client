@@ -2,9 +2,12 @@ import { Link, NavLink } from "react-router";
 import Container from "./Container";
 import useAuth from "../hooks/useAuth";
 import { FaShoppingCart } from "react-icons/fa";
+import useCartsData from "../hooks/useCartsData";
 
 const Header = () => {
   const { user, signOutUser } = useAuth();
+  const [cartsData] = useCartsData();
+
   const links = (
     <>
       <li>
@@ -19,7 +22,9 @@ const Header = () => {
       <li>
         <NavLink to="/myCart">
           <FaShoppingCart size={20}></FaShoppingCart>
-          <div className="badge badge-sm badge-secondary">0</div>
+          <div className="badge badge-sm badge-secondary">
+            {cartsData.length}
+          </div>
         </NavLink>
       </li>
     </>
