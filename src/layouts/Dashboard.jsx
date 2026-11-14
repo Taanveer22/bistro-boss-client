@@ -45,10 +45,16 @@ const Dashboard = () => {
                 <FaBook></FaBook> <span>My Booking</span>
               </NavLink>
             </li>
+            <div className="divider divider-neutral"></div>
+            <li>
+              <NavLink to="/">
+                <FaHome></FaHome> <span>Home</span>
+              </NavLink>
+            </li>
           </ul>
         </div>
         {/* content */}
-        <div className="flex-1">
+        <div className="flex-1 p-8">
           <Outlet></Outlet>
         </div>
       </section>
