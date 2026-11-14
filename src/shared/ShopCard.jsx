@@ -1,13 +1,15 @@
 import Swal from "sweetalert2";
 import useAuth from "../hooks/useAuth";
-import useAxiosPublic from "../hooks/useAxiosPublic";
 import { useLocation, useNavigate } from "react-router";
+import useCartsData from "../hooks/useCartsData";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const ShopCard = ({ item }) => {
   const { user } = useAuth();
-  const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
   const location = useLocation();
+  const [, refetch] = useCartsData();
 
   const { _id, name, image, recipe, price } = item;
 
@@ -24,16 +26,18 @@ const ShopCard = ({ item }) => {
         price,
       };
 
-      axiosPublic
+      axiosSecure
         .post("/carts", cartItem)
         .then((res) => {
           // console.log(res.data);
           if (res.data.insertedId) {
             Swal.fire({
               title: "Done!",
-              text: "Item added to your cart.",
+              text: `${name} added to your cart.`,
               icon: "success",
             });
+            // updating the cart using tanstack query refetch
+            refetch();
           }
         })
         .catch((error) => {
@@ -55,9 +59,10 @@ const ShopCard = ({ item }) => {
       });
     }
   };
+
   return (
     <div>
-      <div className="card h-96 bg-base-100 shadow-sm">
+      <div className="card relative h-96 bg-base-100 shadow-sm">
         <figure>
           <img src={image} alt="order img" className="w-full" />
         </figure>

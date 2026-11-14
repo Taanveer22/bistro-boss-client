@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import useAuth from "../hooks/useAuth";
 
 const SignUp = () => {
@@ -31,9 +31,10 @@ const SignUp = () => {
           <div className="w-full max-w-sm lg:w-1/2 text-center lg:text-left">
             <h1 className="text-5xl font-bold">Signup now!</h1>
             <p className="py-6">
-              Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-              excepturi exercitationem quasi. In deleniti eaque aut repudiandae
-              et a id nisi.
+              Go to{" "}
+              <Link to="/" className="text-blue-500">
+                Homepage
+              </Link>
             </p>
           </div>
           <form

@@ -60,13 +60,12 @@ const Login = () => {
     <div className="hero bg-base-200 min-h-screen">
       <div className="hero-content flex-col lg:flex-row-reverse">
         <div className="w-full min-w-sm lg:w-1/2 text-center lg:text-left">
-          <h1 className="text-5xl font-bold">Login Page</h1>
+          <h1 className="text-5xl font-bold">Login Now!</h1>
           <p className="py-6">
             New to here . Please{" "}
             <Link to="/signup" className="text-blue-500">
               Sign Up
-            </Link>{" "}
-            now .
+            </Link>
           </p>
         </div>
         <div className="w-full min-w-sm lg:w-1/2 card bg-base-100  shrink-0 shadow-2xl">
