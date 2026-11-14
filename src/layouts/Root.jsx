@@ -7,6 +7,7 @@ const Root = () => {
   // console.log(location);
   const noHeaderFooter =
     location?.pathname === "/login" || location?.pathname === "/signup";
+  // console.log(noHeaderFooter);
 
   return (
     <>

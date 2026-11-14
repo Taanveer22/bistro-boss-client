@@ -20,7 +20,7 @@ const Header = () => {
         <NavLink to="/shop/offered">Shop</NavLink>
       </li>
       <li>
-        <NavLink to="/myCart">
+        <NavLink to="/dashboard/myCart">
           <FaShoppingCart size={20}></FaShoppingCart>
           <div className="badge badge-sm badge-secondary">
             {cartsData.length}
@@ -30,14 +30,13 @@ const Header = () => {
     </>
   );
 
-  const handleSignOutUser = () => {
-    signOutUser()
-      .then(() => {
-        console.log("log out done");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+  const handleSignOutUser = async () => {
+    try {
+      await signOutUser();
+      console.log("Logout successful");
+    } catch (error) {
+      console.log("Logout failed:", error);
+    }
   };
 
   return (
@@ -75,7 +74,9 @@ const Header = () => {
                 {links}
               </ul>
             </div>
-            <a className="btn btn-soft text-xl">Bistro Boss</a>
+            <Link to="/" className="btn btn-soft text-xl">
+              Bistro Boss
+            </Link>
           </div>
           <div className="navbar-center hidden lg:flex">
             <ul className="menu menu-horizontal items-center px-1">{links}</ul>
