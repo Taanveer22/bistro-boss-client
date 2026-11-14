@@ -1,12 +1,54 @@
 import { FaTrash } from "react-icons/fa";
 import useCartsData from "../../hooks/useCartsData";
+import Swal from "sweetalert2";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const MyCart = () => {
-  const [cartsData] = useCartsData();
+  const [cartsData, refetch] = useCartsData();
+  const axiosSecure = useAxiosSecure();
+
   const cartsPrice = cartsData.reduce(
     (total, currentValue) => total + currentValue.price,
     0,
   );
+
+  const handleDeleteFromCarts = (id) => {
+    console.log(id);
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure
+          .delete(`/carts/${id}`)
+          .then((res) => {
+            // console.log(res.data);
+            if (res.data.deletedCount > 0) {
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your file has been deleted.",
+                icon: "success",
+              });
+              // use refetch from tanstack query for updating data
+              refetch();
+            }
+          })
+          .catch((error) => {
+            console.log("failed to delete from carts", error);
+            Swal.fire({
+              title: "Error!",
+              text: "Could not delete the item. Please try again.",
+              icon: "error",
+            });
+          });
+      }
+    });
+  };
 
   return (
     <section>
@@ -47,7 +89,10 @@ const MyCart = () => {
                 <td>{cartItem?.name}</td>
                 <td>{cartItem?.price}</td>
                 <th>
-                  <button className="btn btn-xs btn-error">
+                  <button
+                    onClick={() => handleDeleteFromCarts(cartItem?._id)}
+                    className="btn btn-xs btn-error"
+                  >
                     <FaTrash></FaTrash>
                   </button>
                 </th>
