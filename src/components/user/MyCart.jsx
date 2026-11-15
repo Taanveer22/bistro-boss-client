@@ -42,7 +42,7 @@ const MyCart = () => {
             console.log("failed to delete from carts", error);
             Swal.fire({
               title: "Error!",
-              text: "Could not delete the item. Please try again.",
+              text: "Could not delete the item.",
               icon: "error",
             });
           });
