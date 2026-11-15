@@ -7,6 +7,7 @@ import MenuPage from "../pages/MenuPage";
 import ShopPage from "../pages/ShopPage";
 import Dashboard from "../layouts/Dashboard";
 import MyCart from "../components/user/MyCart";
+import PrivateRoute from "./PrivateRoute";
 
 const publicRoutes = createBrowserRouter([
   {
@@ -37,7 +38,11 @@ const publicRoutes = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <Dashboard />,
+    element: (
+      <PrivateRoute>
+        <Dashboard />
+      </PrivateRoute>
+    ),
     children: [
       {
         path: "myCart",

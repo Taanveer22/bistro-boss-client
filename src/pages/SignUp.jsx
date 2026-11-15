@@ -1,13 +1,16 @@
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router";
 import useAuth from "../hooks/useAuth";
+import useAxiosPublic from "../hooks/useAxiosPublic";
 
 const SignUp = () => {
   const navigate = useNavigate();
+  const axiosPublic = useAxiosPublic();
   const { createUser, updateUserProfile } = useAuth();
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
 
@@ -17,10 +20,21 @@ const SignUp = () => {
     try {
       const result = await createUser(email, password);
       console.log(result);
-      await updateUserProfile(name, photo);
+      const result2 = await updateUserProfile(name, photo);
+      console.log(result2);
+
+      const userInfo = {
+        name,
+        email,
+      };
+      const res = await axiosPublic.post("/users", userInfo);
+      console.log(res.data);
+      // reset and navigate
+      reset();
       navigate("/");
     } catch (error) {
-      console.log(error.message);
+      console.log("signup error", error.message);
+      console.log("server error", error.response?.data);
     }
   };
 
