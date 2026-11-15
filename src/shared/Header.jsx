@@ -20,7 +20,7 @@ const Header = () => {
         <NavLink to="/shop/offered">Shop</NavLink>
       </li>
       <li>
-        <NavLink to="/dashboard/myCart">
+        <NavLink to="/dashboard/user/myCart">
           <FaShoppingCart size={20}></FaShoppingCart>
           <div className="badge badge-sm badge-secondary">
             {cartsData.length}
