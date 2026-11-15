@@ -1,17 +1,56 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { FaTrash } from "react-icons/fa";
+import Swal from "sweetalert2";
 
 const AllUsers = () => {
   const axiosSecure = useAxiosSecure();
 
-  const { data: usersData = [] } = useQuery({
+  const { data: usersData = [], refetch } = useQuery({
     queryKey: ["usersData"],
     queryFn: async () => {
       const res = await axiosSecure.get("/users");
       return res.data;
     },
   });
+
+  const handleDeleteFromUsers = (userItem) => {
+    // console.log(userItem);
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure
+          .delete(`/users/${userItem._id}`)
+          .then((res) => {
+            // console.log(res.data);
+            if (res.data.deletedCount > 0) {
+              Swal.fire({
+                title: "Deleted!",
+                text: "User has been deleted.",
+                icon: "success",
+              });
+              // use refetch from tanstack query for updating data
+              refetch();
+            }
+          })
+          .catch((error) => {
+            console.log("failed to delete from users", error);
+            Swal.fire({
+              title: "Error!",
+              text: "Could not delete the user. Please try again.",
+              icon: "error",
+            });
+          });
+      }
+    });
+  };
 
   return (
     <div>
@@ -37,7 +76,10 @@ const AllUsers = () => {
                 <td>{userItem?.email}</td>
                 <td>Blue</td>
                 <td>
-                  <button className="btn btn-xs btn-error">
+                  <button
+                    onClick={() => handleDeleteFromUsers(userItem)}
+                    className="btn btn-xs btn-error"
+                  >
                     <FaTrash></FaTrash>
                   </button>
                 </td>
