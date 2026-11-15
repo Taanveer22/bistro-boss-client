@@ -9,6 +9,7 @@ import {
   validateCaptcha,
 } from "react-simple-captcha";
 import { useForm } from "react-hook-form";
+import useAxiosPublic from "../hooks/useAxiosPublic";
 
 const Login = () => {
   const { googleSigninUser, signInUser } = useAuth();
@@ -16,6 +17,7 @@ const Login = () => {
   const location = useLocation();
   const captchaRef = useRef(null);
   const [disabledLogin, setDisabledLogin] = useState(false);
+  const axiosPublic = useAxiosPublic();
   const {
     register,
     handleSubmit,
@@ -32,7 +34,7 @@ const Login = () => {
       console.log(result);
       navigate(from, { replace: true });
     } catch (error) {
-      console.log(error);
+      console.log("login form error", error.message);
     }
   };
 
@@ -40,9 +42,16 @@ const Login = () => {
     try {
       const result = await googleSigninUser();
       console.log(result);
+      const userInfo = {
+        name: result?.user?.displayName,
+        email: result?.user?.email,
+      };
+      const res = await axiosPublic.post("/users", userInfo);
+      console.log(res.data);
       navigate(from, { replace: true });
     } catch (error) {
-      console.log(error);
+      console.log("google login error", error.message);
+      console.log("server error", error.response?.data);
     }
   };
 
