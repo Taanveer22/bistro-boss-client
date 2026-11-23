@@ -10,12 +10,14 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { auth } from "../firebase/config";
+import useAxiosPublic from "../hooks/useAxiosPublic";
 
 const provider = new GoogleAuthProvider();
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const axiosPublic = useAxiosPublic();
 
   const googleSigninUser = () => {
     setLoading(true);
@@ -48,11 +50,38 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      setLoading(false);
+      console.log("current user from auth provider", currentUser);
+
+      try {
+        if (currentUser) {
+          // get and store token
+          const userPayload = { email: currentUser?.email };
+          axiosPublic
+            .post("/jwt/login", userPayload)
+            .then((res) => {
+              console.log(res.data);
+              if (res?.data?.token) {
+                localStorage.setItem("access-token", res.data.token);
+              }
+            })
+            .catch((error) => {
+              console.log("jwt token login error", error);
+            });
+        } else {
+          // remove token
+          localStorage.removeItem("access-token");
+        }
+      } catch (error) {
+        console.log("authprovider useEffect error", error);
+      } finally {
+        setLoading(false);
+      }
     });
 
-    return unsubscribe;
-  });
+    return () => {
+      unsubscribe();
+    };
+  }, [setUser, setLoading, axiosPublic]);
 
   const authInfo = {
     user,
