@@ -2,20 +2,20 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { FaTrash, FaUsers } from "react-icons/fa";
 import Swal from "sweetalert2";
+import useAuth from "../../hooks/useAuth";
 
 const AllUsers = () => {
+  const { loading, user } = useAuth();
   const axiosSecure = useAxiosSecure();
 
   const { data: usersData = [], refetch } = useQuery({
     queryKey: ["usersData"],
     queryFn: async () => {
-      const res = await axiosSecure.get("/users", {
-        headers: {
-          authorization: `Bearer ${localStorage.getItem("access-token")}`,
-        },
-      });
+      const res = await axiosSecure.get("/users");
       return res.data;
     },
+    enabled: !loading && !!user,
+    retry: false,
   });
 
   const handleDeleteFromUsers = (userItem) => {

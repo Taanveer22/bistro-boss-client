@@ -20,27 +20,22 @@ const AuthProvider = ({ children }) => {
   const axiosPublic = useAxiosPublic();
 
   const googleSigninUser = () => {
-    setLoading(true);
     return signInWithPopup(auth, provider);
   };
 
   const createUser = (email, password) => {
-    setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
   const signInUser = (email, password) => {
-    setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
 
   const signOutUser = () => {
-    setLoading(true);
     return signOut(auth);
   };
 
   const updateUserProfile = (name, photo) => {
-    setLoading(true);
     return updateProfile(auth.currentUser, {
       displayName: name,
       photoURL: photo,
@@ -48,31 +43,30 @@ const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       setUser(currentUser);
       console.log("current user from auth provider", currentUser);
 
       try {
         if (currentUser) {
-          // get and store token
+          // generate custom jwt
           const userPayload = { email: currentUser?.email };
-          axiosPublic
-            .post("/jwt/login", userPayload)
-            .then((res) => {
-              console.log(res.data);
-              if (res?.data?.token) {
-                localStorage.setItem("access-token", res.data.token);
-              }
-            })
-            .catch((error) => {
-              console.log("jwt token login error", error);
-            });
+          const res = await axiosPublic.post("/jwt/login", userPayload);
+          console.log(res.data);
+          // store custom jwt
+          if (res?.data?.token) {
+            localStorage.setItem("access-token", res.data.token);
+          }
+          console.log("JWT stored");
         } else {
-          // remove token
+          // Remove JWT after logout
           localStorage.removeItem("access-token");
+          console.log("JWT removed!");
         }
       } catch (error) {
         console.log("authprovider useEffect error", error);
+        // Remove invalid/old JWT
+        localStorage.removeItem("access-token");
       } finally {
         setLoading(false);
       }
@@ -81,7 +75,7 @@ const AuthProvider = ({ children }) => {
     return () => {
       unsubscribe();
     };
-  }, [setUser, setLoading, axiosPublic]);
+  }, [axiosPublic]);
 
   const authInfo = {
     user,
