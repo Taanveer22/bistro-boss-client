@@ -11,9 +11,10 @@ import { FaBookBookmark } from "react-icons/fa6";
 import { MdRateReview } from "react-icons/md";
 import { RiAlignItemBottomFill } from "react-icons/ri";
 import { NavLink, Outlet } from "react-router";
+import useAdminRole from "../hooks/useAdminRole";
 
 const Dashboard = () => {
-  let isAdmin = true;
+  let [isAdmin] = useAdminRole();
 
   return (
     <>

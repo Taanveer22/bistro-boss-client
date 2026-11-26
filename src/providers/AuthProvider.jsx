@@ -20,14 +20,17 @@ const AuthProvider = ({ children }) => {
   const axiosPublic = useAxiosPublic();
 
   const googleSigninUser = () => {
+    setLoading(true);
     return signInWithPopup(auth, provider);
   };
 
   const createUser = (email, password) => {
+    setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
   const signInUser = (email, password) => {
+    setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
 
@@ -44,7 +47,7 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
-      setUser(currentUser);
+      localStorage.removeItem("access-token");
       console.log("current user from auth provider", currentUser);
 
       try {
@@ -58,16 +61,11 @@ const AuthProvider = ({ children }) => {
             localStorage.setItem("access-token", res.data.token);
           }
           console.log("JWT stored");
-        } else {
-          // Remove JWT after logout
-          localStorage.removeItem("access-token");
-          console.log("JWT removed!");
         }
       } catch (error) {
         console.log("authprovider useEffect error", error);
-        // Remove invalid/old JWT
-        localStorage.removeItem("access-token");
       } finally {
+        setUser(currentUser);
         setLoading(false);
       }
     });

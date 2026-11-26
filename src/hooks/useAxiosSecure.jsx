@@ -12,7 +12,7 @@ const useAxiosSecure = () => {
   const { signOutUser } = useAuth();
 
   useEffect(() => {
-    // Add a request interceptor
+    //================ request interceptor ================
     const requestInterceptor = axiosSecure.interceptors.request.use(
       // 1st function
       function (config) {
@@ -29,13 +29,12 @@ const useAxiosSecure = () => {
       },
     );
 
-    // Add a response interceptor
+    //================ response interceptor ================
     const responseInterceptor = axiosSecure.interceptors.response.use(
       // 1st function
       function (response) {
         return response;
       },
-
       // 2nd function
       async function (error) {
         console.log("response interceptor error", error);
@@ -47,11 +46,15 @@ const useAxiosSecure = () => {
         return Promise.reject(error);
       },
     );
+
+    // ================  useEffect return ================
     return () => {
       axiosSecure.interceptors.request.eject(requestInterceptor);
       axiosSecure.interceptors.response.eject(responseInterceptor);
     };
   }, [navigate, signOutUser]);
+
+  // ================  component return ================
   return axiosSecure;
 };
 

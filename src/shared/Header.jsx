@@ -34,7 +34,6 @@ const Header = () => {
     try {
       await signOutUser();
       console.log("Logout successful");
-      localStorage.removeItem("access-token");
     } catch (error) {
       console.log("Logout failed:", error);
     }
